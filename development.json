@@ -1,0 +1,12 @@
+{
+  "private": {
+    "google": {
+      "key": "954650817845-9ndn6g86o75hjutqk7lvrm8er4d7jhcb.apps.googleusercontent.com",
+      "secret": "a0mcVjT6HmM1afRonw8ru4sp"
+    },
+    "twitter": {
+      "key": "vIbO8lT8ttpZJVS4cFK8keNes",
+      "secret": "83zV0Qpnh0ExgpmNDDqCD11a0rp8dzJwV6G08VjzXkAMFLlavZ"
+    }
+  }
+}

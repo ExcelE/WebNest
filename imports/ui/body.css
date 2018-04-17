@@ -1,0 +1,12 @@
+body > div > div:nth-child(1) > nav > div > a {
+  padding-left: 20px !important;
+  padding-top: 2px;
+}
+
+#nav-mobile > li:nth-child(1) > a,
+#nav-mobile > li:nth-child(2) > a,
+#login-name-link {
+  color: #643094;
+}
+
+
