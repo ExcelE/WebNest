@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Members } from '../api/members';
 import { Rooms } from '../api/rooms';
+import { UploadHistory } from  '../api/uploadHist';
 
 import './body.html';
 import './members.html';
@@ -12,10 +13,16 @@ import './main.html';
 import './body.css';
 import './email.html';
 
+
 AutoForm.setDefaultTemplate('materialize');
 
 window.Members = Members;
 window.Rooms = Rooms;
+
+// character counter for twitter
+$(document).ready(function() {
+  $('input#input_text, textarea#textarea2').characterCounter();
+});
 
 Template.body.onCreated(function bodyOnCreated() {
   Meteor.subscribe('members.allMembers');
@@ -26,9 +33,22 @@ Template.registerHelper('formatDate', function(date) {
   return moment(date).format('MMM Do YYYY');
 });
 
+Template.tweetField.events({
+  'submit form': function(event){
+    event.preventDefault();
+    var tweet = event.target.textarea2.value;
+    Meteor.call('uploadTweet', tweet);
+    event.target.textarea2.value = "";
+    return false;
+  }
+})
+
 Template.members.helpers({
   members() {
     return Members.find({});
+  },
+  tweets() {
+    return UploadHistory.find({});
   },
 });
 
@@ -45,6 +65,22 @@ Template.emptyRooms.helpers({
     });
   },
 });
+
+Template.tweet.helpers({
+  uploadedBy() {
+    return this._id;
+  },
+  
+  returnTweet(id) {
+    const tweet = UploadHistory.findOne({ id: JSON.stringify(id) });
+    return `${tweet.content}`;
+  },
+
+  postedOn(id) {
+    const tweet = UploadHistory.findOne({ id: JSON.stringify(id) });
+    return `${tweet.createdAt}`;
+  }
+})
 
 Template.room.helpers({
   makeUniqueID() {

@@ -6,9 +6,9 @@
     <div class="col s6">
         <a class="waves-effect waves-light btn modal-trigger" href="#modal2">Send a Quick Tweet!</a>
     </div>
-    <!-- {{#each members}}
-      {{> member}}
-    {{/each}} -->
+    {{#each tweets}}
+      {{> tweet}}
+    {{/each}}
   </div>
   <div id="modal1" class="modal modal-fixed-footer">
       <div class="modal-content">
@@ -21,18 +21,9 @@
         </a>
       </div>
   </div>
-  <div id="modal2" class="modal modal-fixed-footer">
-        <div class="modal-content">
-          <h4>Send a Quick Tweet!</h4>
-          {{> quickForm collection="Members" id="insertMemberForm" type="method" meteormethod="insertMember"}}
-        </div>
-        <div class="modal-footer">
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">
-            Close
-          </a>
-        </div>
-    </div>
+  {{> tweetField}}
 </template>
+
 
 <template name="member">
   <div class="col s6">
@@ -51,5 +42,46 @@
       </div>
     </div>
   </div>
+</template>
+
+<template name="tweetField">
+    <div id="modal2" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4>Send a Quick Tweet!</h4>
+            <div class="row">
+                <form class="col s12">
+                  <div class="row">
+                    <div class="input-field col s12">
+                       <input id="textarea2" type="text" data-length="10">
+                        <label for="input_text">Your Tweet!...</label>
+                    </div>
+                  </div>
+                </form>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <div class = "card-panel">
+                <button class = "btn waves-effect waves-light red" type = "submit">Send
+                   <i class = "material-icons right"></i></button>
+                <button class = "btn waves-effect waves-light red disabled" type = "submit" >Cancel
+                   <i class = "material-icons right"></i></button>
+             </div>
+          </div>
+        </div>
+</template>
+
+
+<template name="tweet"> 
+    <li>
+      <div class="collapsible-header">
+          Tweet: {{returnTweet id}}
+          <span class="new badge" data-badge-caption="">{{createdOn id}}</span>
+      </div>
+      <!-- <div class="collapsible-body">
+        <h5>Change Room status</h5>
+        {{> quickForm collection="Rooms" type="method-update" 
+          doc=this autosave=true id=makeUniqueID meteormethod="updateRoom"}}
+      </div> -->
+    </li>
 </template>
 

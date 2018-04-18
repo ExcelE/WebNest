@@ -33,3 +33,4 @@ iron:router
 meteorhacks:ssr
 meteortesting:mocha
 email
+service-configuration

@@ -3,22 +3,25 @@ import SimpleSchema from 'simpl-schema';
 
 SimpleSchema.extendOptions(['autoform']);
 
-export const Twitter_History = new Mongo.Collection('twitter_history');
+export const UploadHistory = new Mongo.Collection('uploadHistory');
 
-Twitter_History.allow({
+UploadHistory.allow({
     insert() { return false; },
     update() { return false; },
     remove() { return false; },
 });
   
-Twitter_History.deny({
+UploadHistory.deny({
     insert() { return true; },
     update() { return true; },
     remove() { return true; },
 });
 
-const Twitter_History_Schema = new SimpleSchema {
+const UploadHistorySchema = new SimpleSchema ({
+    id: { type: String },
     userName: { type: String },
+    email: { type: String },
+    content: { type: String },
     createdAt: {
         type: Date,
         autoform: {
@@ -27,4 +30,6 @@ const Twitter_History_Schema = new SimpleSchema {
         },
         defaultValue: new Date(),
     },
-}
+});
+
+UploadHistory.attachSchema(UploadHistorySchema);

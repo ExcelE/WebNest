@@ -3,6 +3,7 @@ import _ from 'lodash';
 import faker from 'faker';
 import { Members } from '../imports/api/members';
 import { Rooms } from '../imports/api/rooms';
+import { UploadHistory } from '../imports/api/uploadHist';
 import './twitter.js';
 
 Meteor.startup(() => {
@@ -17,6 +18,10 @@ Meteor.startup(() => {
     return Rooms.find();
   });
 
+  Meteor.publish('uploadHistory.allUploads', () => {
+    return UploadHistory.find();
+  });
+  
   Meteor.publish('members.allMembers', () => {
     return Members.find();
   });
